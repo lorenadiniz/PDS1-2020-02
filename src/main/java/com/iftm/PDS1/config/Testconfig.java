@@ -8,9 +8,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import com.iftm.PDS1.entities.User;
 import com.iftm.PDS1.entities.Order;
-import com.iftm.PDS1.repositories.UserRepository;
-import com.iftm.PDS1.repositories.OrderRepository;
 import com.iftm.PDS1.entities.enums.OrderStatus;
+import com.iftm.PDS1.entities.Category;
+import com.iftm.PDS1.repositories.UserRepository;
+import com.iftm.PDS1.repositories.CategoryRepository;
+import com.iftm.PDS1.repositories.OrderRepository;
 
 @Configuration
 @Profile("test")
@@ -21,9 +23,18 @@ public class Testconfig implements CommandLineRunner {
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private CategoryRepository categoryRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
+		
+		Category cat1 = new Category(null, "Electronics");
+		Category cat2 = new Category(null, "Books");
+		Category cat3 = new Category(null, "Computers");
+
+		categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
 
 		User u1 = new User(null, "Maria Brown", "maria@gmail.com", "988888888", "123456");
 
