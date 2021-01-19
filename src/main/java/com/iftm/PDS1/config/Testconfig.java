@@ -10,6 +10,7 @@ import com.iftm.PDS1.entities.User;
 import com.iftm.PDS1.entities.Order;
 import com.iftm.PDS1.repositories.UserRepository;
 import com.iftm.PDS1.repositories.OrderRepository;
+import com.iftm.PDS1.entities.enums.OrderStatus;
 
 @Configuration
 @Profile("test")
@@ -28,11 +29,11 @@ public class Testconfig implements CommandLineRunner {
 
 		User u2 = new User(null, "Mariano Green", "mariano@gmail.com", "977777777", "123456");
 
-		Order o1 = new Order(null, Instant.parse("2019-06-20T19:53:07Z"), u1);
+		Order o1 = new Order(null, Instant.parse("2019-06-20T19:53:07Z"), u1, OrderStatus.PAID);
 		
-		Order o2 = new Order(null, Instant.parse("2019-07-21T03:42:10Z"), u2);
+		Order o2 = new Order(null, Instant.parse("2019-07-21T03:42:10Z"), u2, OrderStatus.WAITING_PAYMENT);
 		
-		Order o3 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"), u1);
+		Order o3 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"), u1, OrderStatus.WAITING_PAYMENT);
 		
 		userRepository.saveAll(Arrays.asList(u1, u2));
 		orderRepository.saveAll(Arrays.asList(o1, o2, o3));
