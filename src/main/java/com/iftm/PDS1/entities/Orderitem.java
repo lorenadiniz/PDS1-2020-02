@@ -14,7 +14,7 @@ import com.iftm.PDS1.entities.pk.OrderItemPK;
 public class Orderitem implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@EmbeddedId
 	private OrderItemPK id = new OrderItemPK();
 
@@ -28,10 +28,10 @@ public class Orderitem implements Serializable {
 		this.quantity = quantity;
 		this.price = price;
 	}
-	
+
 	public Orderitem() {
 	}
-	
+
 	@JsonIgnore
 	public Order getOrder() {
 		return id.getOrder();
@@ -64,7 +64,11 @@ public class Orderitem implements Serializable {
 	public void setPrice(Double price) {
 		this.price = price;
 	}
-	
+
+	public Double getsubTotal() {
+		return price * quantity;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -90,6 +94,4 @@ public class Orderitem implements Serializable {
 		return true;
 	}
 
-	
 }
-
