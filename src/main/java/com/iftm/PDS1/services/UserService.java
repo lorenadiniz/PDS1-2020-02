@@ -25,13 +25,13 @@ public class UserService {
 
 	public List<UserDTO> findAll() {
 		List<User> list = repository.findAll();
-		
+
 		return list.stream().map(e -> new UserDTO(e)).collect(Collectors.toList());
 	}
 
 	public UserDTO findById(Long id) {
 		Optional<User> obj = repository.findById(id);
-	
+
 		User entity = obj.orElseThrow(() -> new ResourceNotFoundException(id));
 		return new UserDTO(entity);
 	}
@@ -52,20 +52,22 @@ public class UserService {
 
 	}
 
-	private void updateData(User entity, User obj) {
+	private void updateData(User entity, UserDTO dto) {
 
-		entity.setName(obj.getName());
-		entity.setEmail(obj.getEmail());
-		entity.setPhone(obj.getPhone());
+		entity.setName(dto.getName());
+		entity.setEmail(dto.getEmail());
+		entity.setPhone(dto.getPhone());
 
 	}
 
-	public User update(Long id, User obj) {
+	public UserDTO update(Long id, UserDTO dto) {
 
 		try {
 			User entity = repository.getOne(id);
-			updateData(entity, obj);
-			return repository.save(entity);
+			updateData(entity, dto);
+			entity = repository.save(entity);
+			return new UserDTO(entity);
+
 		} catch (EntityNotFoundException e) {
 			throw new ResourceNotFoundException(id);
 		}
