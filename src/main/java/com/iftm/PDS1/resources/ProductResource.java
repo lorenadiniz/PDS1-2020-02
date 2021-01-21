@@ -2,7 +2,7 @@ package com.iftm.PDS1.resources;
 
 import java.util.List;
 
-import com.iftm.PDS1.entities.Product;
+import com.iftm.PDS1.dto.ProductDTO;
 import com.iftm.PDS1.services.ProductService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,16 +21,16 @@ public class ProductResource {
 	private ProductService service;
 
 	@GetMapping
-	public ResponseEntity<List<Product>> findAll() {	
-		List<Product> list = service.findAll();
+	public ResponseEntity<List<ProductDTO>> findAll() {	
+		List<ProductDTO> list = service.findAll();
 		
 		return ResponseEntity.ok().body(list);
 	}
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Product> findById(@PathVariable Long id) {
-		Product obj = service.findById(id);
-		return ResponseEntity.ok().body(obj);
+	public ResponseEntity<ProductDTO> findById(@PathVariable Long id) {
+		ProductDTO dto = service.findById(id);
+		return ResponseEntity.ok().body(dto);
 	
 	}
 
