@@ -6,7 +6,6 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.iftm.PDS1.entities.pk.OrderItemPK;
 
 @Entity
@@ -32,7 +31,6 @@ public class Orderitem implements Serializable {
 	public Orderitem() {
 	}
 
-	@JsonIgnore
 	public Order getOrder() {
 		return id.getOrder();
 	}
