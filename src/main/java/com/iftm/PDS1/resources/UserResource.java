@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.iftm.PDS1.dto.UserDTO;
-import com.iftm.PDS1.entities.User;
+import com.iftm.PDS1.dto.UserInsertDTO;
 import com.iftm.PDS1.services.UserService;
 import java.net.URI;
 
@@ -27,7 +27,7 @@ public class UserResource {
 
 	@GetMapping
 	public ResponseEntity<List<UserDTO>> findAll() {
-		
+
 		List<UserDTO> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
@@ -41,10 +41,11 @@ public class UserResource {
 	}
 
 	@PostMapping
-	public ResponseEntity<User> insert(@RequestBody User obj) {
-		obj = service.insert(obj);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
-		return ResponseEntity.created(uri).body(obj);
+	public ResponseEntity<UserDTO> insert(@RequestBody UserInsertDTO dto) {
+
+		UserDTO newDto = service.insert(dto);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newDto.getId()).toUri();
+		return ResponseEntity.created(uri).body(newDto);
 	}
 
 	@DeleteMapping(value = "/{id}")
@@ -57,10 +58,10 @@ public class UserResource {
 
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<UserDTO> update(@PathVariable Long id, @RequestBody UserDTO dto) {
-	
+
 		dto = service.update(id, dto);
 		return ResponseEntity.ok().body(dto);
-		
+
 	}
 
 }
