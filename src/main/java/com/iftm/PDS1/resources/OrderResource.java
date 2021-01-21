@@ -2,7 +2,7 @@ package com.iftm.PDS1.resources;
 
 import java.util.List;
 
-import com.iftm.PDS1.entities.Order;
+import com.iftm.PDS1.dto.OrderDTO;
 import com.iftm.PDS1.services.Orderservice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,15 +19,15 @@ public class OrderResource {
 	private Orderservice service;
 
 	@GetMapping
-	public ResponseEntity<List<Order>> findAll() {
-		List<Order> list = service.findAll();
+	public ResponseEntity<List<OrderDTO>> findAll() {
+		List<OrderDTO> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Order> findById(@PathVariable Long id) {
-		Order obj = service.findById(id);
-		return ResponseEntity.ok().body(obj);
+	public ResponseEntity<OrderDTO> findById(@PathVariable Long id) {
+		OrderDTO dto = service.findById(id);
+		return ResponseEntity.ok().body(dto);
 	}
 
 }
