@@ -8,32 +8,32 @@ import javax.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Length;
 
 import com.iftm.PDS1.entities.User;
+import com.iftm.PDS1.services.validation.UserInsertValid;
 
+@UserInsertValid
 public class UserInsertDTO implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
-	
-	
+
 	@NotEmpty(message = "can't be empty")
 	@Length(min = 5, max = 80, message = "Length must be between 5 and 80")
 	private String name;
-	
+
 	@NotEmpty(message = "can't be empty")
 	@Email
 	private String email;
-	
+
 	@NotEmpty(message = "can't be empty")
 	@Length(min = 8, max = 20, message = "Length must be between 8 and 20")
 	private String phone;
-	
+
 	@NotEmpty(message = "can't be empty")
 	private String password;
 
-	
 	public UserInsertDTO() {
-	
+
 	}
 
 	public UserInsertDTO(Long id, String name, String email, String phone, String password) {
@@ -56,7 +56,7 @@ public class UserInsertDTO implements Serializable {
 	public User toEntity() {
 		return new User(id, name, email, phone, password);
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
